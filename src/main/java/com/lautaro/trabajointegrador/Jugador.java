@@ -79,6 +79,5 @@ public class Jugador {
                 puntosObtenidos = puntosObtenidos + 1;
             }
         }
-        //System.out.println("Puntos de " + nombreJugador +": " + puntosObtenidos);
     }
 }

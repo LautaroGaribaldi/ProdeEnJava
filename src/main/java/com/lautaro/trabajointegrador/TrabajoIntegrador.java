@@ -94,12 +94,8 @@ public class TrabajoIntegrador {
             System.out.println("Ronda numero: " + rondaActual.nro);
             for (int i = 0; i < rondaActual.getPartidos().size(); i++) {
                 nroPartido = rondaActual.getPartidos().get(i).nro; // extraigo el nro de partido
-                equipo1 = rondaActual.getPartidos().get(i).getEquipos().get(0).nombre;  // extraigo sus equipos
-                equipo2 = rondaActual.getPartidos().get(i).getEquipos().get(1).nombre;
                 resultado = rondaActual.getPartidos().get(i).resultado().resultado;    // Extraigo el resultado del partido
-                System.out.println("Partido numero:" + nroPartido);
-                System.out.println("");
-                System.out.println(equipo1 + " VS " + equipo2);
+                rondaActual.getPartidos().get(i).mostrarPartido();
                 System.out.println("");
                 if (resultado != 2) {   // si el resultado no es 2, veo quien fue el ganador
                     equipoGanador = rondaActual.getPartidos().get(i).getEquipos().get(resultado).nombre; // Extraigo nombre ganador
