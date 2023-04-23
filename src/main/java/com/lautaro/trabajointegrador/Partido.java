@@ -31,8 +31,8 @@ public class Partido {
     }
 
     public ResultadoEnum resultado() {
-        int goles1 = equipos.get(0).goles;
-        int goles2 = equipos.get(1).goles;
+        int goles1 = equipos.get(0).getGoles();
+        int goles2 = equipos.get(1).getGoles();
         int diferenciaGoles = goles1 - goles2;
         int resultado;
         if (diferenciaGoles > 0) {
@@ -50,9 +50,9 @@ public class Partido {
     public void mostrarPartido() {
         System.out.println("Partido numero: " + nro);
         System.out.println("");
-        System.out.println(equipos.get(0).nombre + " VS " + equipos.get(1).nombre);
-        System.out.println(equipos.get(0).nombre + " goles: " + equipos.get(0).goles);
-        System.out.println(equipos.get(1).nombre + " goles: " + equipos.get(1).goles);
+        System.out.println(equipos.get(0).getNombre() + " VS " + equipos.get(1).getNombre());
+        System.out.println(equipos.get(0).getNombre() + " goles: " + equipos.get(0).getGoles());
+        System.out.println(equipos.get(1).getNombre() + " goles: " + equipos.get(1).getGoles());
     }
 
 }

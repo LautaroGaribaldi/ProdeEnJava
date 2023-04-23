@@ -57,7 +57,7 @@ public class Jugador {
                 eleccion = apuesta.get(i).getApuesta();
                 
                 if (eleccion != 2) {
-                    ganador = apuesta.get(i).getPartido().getEquipos().get(eleccion).nombre;
+                    ganador = apuesta.get(i).getPartido().getEquipos().get(eleccion).getNombre();
                     System.out.println((i + 1) + ". " + ganador);
                 } else {
                     System.out.println((i+1) +". Empate");
@@ -72,8 +72,6 @@ public class Jugador {
         for(int i = 0; i< apuesta.size();i++){
             int apuestaRealizada = apuesta.get(i).resultado().resultado;
             int resultadoPartido = apuesta.get(i).getPartido().resultado().resultado;
-            //System.out.println("apuesta realizada:" + apuestaRealizada);
-            //System.out.println("resultado partido:" + resultadoPartido);
             
             if(apuestaRealizada == resultadoPartido){
                 puntosObtenidos = puntosObtenidos + 1;

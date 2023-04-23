@@ -19,23 +19,23 @@ public class TrabajoIntegrador {
         Partido p1 = new Partido(1);
         Partido p2 = new Partido(2);
         Partido p3 = new Partido(3);
-        Equipo e1 = new Equipo("Racing",(int) (Math.floor(Math.random()*5)), "Goles de Rojas y gordona");
+        Equipo e1 = new Equipo("Racing",(int) (Math.floor(Math.random()*5)), "El mas grande de Avellaneda");
         Equipo e2 = new Equipo("Independiente", (int) (Math.floor(Math.random()*5)), "Altos Pechofrio");
-        Equipo e3 = new Equipo("Boca", (int) (Math.floor(Math.random()*5)), "Gol de villa");
-        Equipo e4 = new Equipo("River", (int) (Math.floor(Math.random()*5)), "gol de alguna gallina");
-        Equipo e5 = new Equipo("Lanus", (int) (Math.floor(Math.random()*5)), "gol de algun lanuniense");
-        Equipo e6 = new Equipo("Banfield", (int) (Math.floor(Math.random()*5)), "gol de algun banfielano");
+        Equipo e3 = new Equipo("Boca", (int) (Math.floor(Math.random()*5)), "Boquita el mas grande");
+        Equipo e4 = new Equipo("River", (int) (Math.floor(Math.random()*5)), "Se fueron a la b");
+        Equipo e5 = new Equipo("Lanus", (int) (Math.floor(Math.random()*5)), "No tienen gas, no tienen luz!");
+        Equipo e6 = new Equipo("Banfield", (int) (Math.floor(Math.random()*5)), "en 2009 lograron algo, despues murieron");
 
         Ronda r2 = new Ronda(2);
         Partido p4 = new Partido(4);
         Partido p5 = new Partido(5);
         Partido p6 = new Partido(6);
-        Equipo e7 = new Equipo("Talleres de escalada", (int) (Math.floor(Math.random()*5)), "Goles de Rojas y gordona");
-        Equipo e8 = new Equipo("Belgrano", (int) (Math.floor(Math.random()*5)), "Altos Pechofrio");
-        Equipo e9 = new Equipo("Ferro", (int) (Math.floor(Math.random()*5)), "Gol de villa");
-        Equipo e10 = new Equipo("San lorenzo", (int) (Math.floor(Math.random()*5)), "gol de alguna gallina");
-        Equipo e11 = new Equipo("Temperley", (int) (Math.floor(Math.random()*5)), "gol de algun lanuniense");
-        Equipo e12 = new Equipo("Los andes", (int) (Math.floor(Math.random()*5)), "gol de algun banfielano");
+        Equipo e7 = new Equipo("Talleres de escalada", (int) (Math.floor(Math.random()*5)), "Son del partido de Lanus, asique no tienen gas ni luz");
+        Equipo e8 = new Equipo("Belgrano", (int) (Math.floor(Math.random()*5)), "Hizo decender a river, unos heroes.");
+        Equipo e9 = new Equipo("Ferro", (int) (Math.floor(Math.random()*5)), "club fantasma");
+        Equipo e10 = new Equipo("San lorenzo", (int) (Math.floor(Math.random()*5)), "San Lorenso de amargo, abrieron un supermercado");
+        Equipo e11 = new Equipo("Temperley", (int) (Math.floor(Math.random()*5)), "No tengo nada contra Temperley");
+        Equipo e12 = new Equipo("Los andes", (int) (Math.floor(Math.random()*5)), "Tampoco tiengo nada contra los Andes");
 
         // Lleno mis partidos con equipos y mi ronda con partidos.
         p1.getEquipos().add(e1);
@@ -100,8 +100,8 @@ public class TrabajoIntegrador {
                 rondaActual.getPartidos().get(i).mostrarPartido();
                 System.out.println("");
                 if (resultado != 2) {   // si el resultado no es 2, veo quien fue el ganador
-                    equipoGanador = rondaActual.getPartidos().get(i).getEquipos().get(resultado).nombre; // Extraigo nombre ganador
-                    golesGanador = rondaActual.getPartidos().get(i).getEquipos().get(resultado).goles; // Extraigo nombre ganador
+                    equipoGanador = rondaActual.getPartidos().get(i).getEquipos().get(resultado).getNombre(); // Extraigo nombre ganador
+                    golesGanador = rondaActual.getPartidos().get(i).getEquipos().get(resultado).getGoles(); // Extraigo nombre ganador
                     System.out.println("El ganador es " + equipoGanador + " con "+ golesGanador +" goles!");
                     System.out.println("");
                 } else {
@@ -131,7 +131,7 @@ public class TrabajoIntegrador {
             apuesta = jugadorActual.apuesta.get((nroPartido - 1)).getApuesta();    // extraigo apuesta del jugador acutal
             nombreJugador = jugadorActual.getNombreJugador();   //Extraigo el nombre del jugador actual
             if (apuesta != 2) {  // si apuesta es diferente de 2 el aposto por un equipo en concreto.
-                nombreApuesta = jugadorActual.apuesta.get((nroPartido - 1)).getPartido().getEquipos().get(apuesta).nombre;  // extraigo nombre del equipo apostado
+                nombreApuesta = jugadorActual.apuesta.get((nroPartido - 1)).getPartido().getEquipos().get(apuesta).getNombre();  // extraigo nombre del equipo apostado
                 System.out.println(nombreJugador + " aposto por " + nombreApuesta);
                 System.out.println("");
             } else {
@@ -146,19 +146,20 @@ public class TrabajoIntegrador {
         Jugador jugadores[] = new Jugador[cantidadJugadores];
 
         for (int i = 0; i < jugadores.length; i++) {
-            String nombreJugador = JOptionPane.showInputDialog("Ingrese nombre del jugador:");
+            String nombreJugador = JOptionPane.showInputDialog("Ingrese nombre del jugador:").trim();
             //Valido si me paso un nombre valido
             while (nombreJugador.equals("")) {
                 System.out.println("Ingresa un nombre!");
-                nombreJugador = JOptionPane.showInputDialog("Ingrese nombre del jugador:");
+                nombreJugador = JOptionPane.showInputDialog("Ingrese nombre del jugador:").trim();
             }
             jugadores[i] = new Jugador((i + 1), nombreJugador, 0);
-
+            
+            //Genero las apuestas de mi jugador creado.
             for (int j = 0; j < rondas.size(); j++) {
                 ArrayList<Partido> partidos = rondas.get(j).getPartidos();
                 for (int x = 0; x < partidos.size(); x++) {
-                    String equipo1 = partidos.get(x).getEquipos().get(0).nombre;
-                    String equipo2 = partidos.get(x).getEquipos().get(1).nombre;
+                    String equipo1 = partidos.get(x).getEquipos().get(0).getNombre();
+                    String equipo2 = partidos.get(x).getEquipos().get(1).getNombre();
                     String eleccion = (JOptionPane.showInputDialog("Partido" + equipo1 + " vs " + equipo2 + "Elige: \n gana " + equipo1 + ": 0. gana " + equipo2 + ": 1. empate: 2"));
                     //Valido si ingreso un valor correcto.
                     while ((!eleccion.equals("0")) && (!eleccion.equals("1")) && (!eleccion.equals("2"))) {
