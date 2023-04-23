@@ -51,6 +51,8 @@ public class Partido {
         System.out.println("Partido numero: " + nro);
         System.out.println("");
         System.out.println(equipos.get(0).nombre + " VS " + equipos.get(1).nombre);
+        System.out.println(equipos.get(0).nombre + " goles: " + equipos.get(0).goles);
+        System.out.println(equipos.get(1).nombre + " goles: " + equipos.get(1).goles);
     }
 
 }

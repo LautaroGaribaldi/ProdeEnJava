@@ -23,5 +23,9 @@ public class Equipo {
     }
     
     
-    
+    public void mostrarEquipo(){
+        System.out.println("Nombre del equipo: " + nombre);
+        System.out.println("Goles realizados: " + goles);
+        System.out.println("Autores de los goles: " + descripccion);
+    }
 }

@@ -19,23 +19,23 @@ public class TrabajoIntegrador {
         Partido p1 = new Partido(1);
         Partido p2 = new Partido(2);
         Partido p3 = new Partido(3);
-        Equipo e1 = new Equipo("Racing", 2, "Goles de Rojas y gordona");
-        Equipo e2 = new Equipo("Independiente", 1, "Altos Pechofrio");
-        Equipo e3 = new Equipo("Boca", 1, "Gol de villa");
-        Equipo e4 = new Equipo("River", 1, "gol de alguna gallina");
-        Equipo e5 = new Equipo("Lanus", 1, "gol de algun lanuniense");
-        Equipo e6 = new Equipo("Banfield", 2, "gol de algun banfielano");
+        Equipo e1 = new Equipo("Racing",(int) (Math.floor(Math.random()*5)), "Goles de Rojas y gordona");
+        Equipo e2 = new Equipo("Independiente", (int) (Math.floor(Math.random()*5)), "Altos Pechofrio");
+        Equipo e3 = new Equipo("Boca", (int) (Math.floor(Math.random()*5)), "Gol de villa");
+        Equipo e4 = new Equipo("River", (int) (Math.floor(Math.random()*5)), "gol de alguna gallina");
+        Equipo e5 = new Equipo("Lanus", (int) (Math.floor(Math.random()*5)), "gol de algun lanuniense");
+        Equipo e6 = new Equipo("Banfield", (int) (Math.floor(Math.random()*5)), "gol de algun banfielano");
 
         Ronda r2 = new Ronda(2);
         Partido p4 = new Partido(4);
         Partido p5 = new Partido(5);
         Partido p6 = new Partido(6);
-        Equipo e7 = new Equipo("Talleres de escalada", 2, "Goles de Rojas y gordona");
-        Equipo e8 = new Equipo("Belgrano", 1, "Altos Pechofrio");
-        Equipo e9 = new Equipo("Ferro", 1, "Gol de villa");
-        Equipo e10 = new Equipo("San lorenzo", 1, "gol de alguna gallina");
-        Equipo e11 = new Equipo("Temperley", 1, "gol de algun lanuniense");
-        Equipo e12 = new Equipo("Los andes", 2, "gol de algun banfielano");
+        Equipo e7 = new Equipo("Talleres de escalada", (int) (Math.floor(Math.random()*5)), "Goles de Rojas y gordona");
+        Equipo e8 = new Equipo("Belgrano", (int) (Math.floor(Math.random()*5)), "Altos Pechofrio");
+        Equipo e9 = new Equipo("Ferro", (int) (Math.floor(Math.random()*5)), "Gol de villa");
+        Equipo e10 = new Equipo("San lorenzo", (int) (Math.floor(Math.random()*5)), "gol de alguna gallina");
+        Equipo e11 = new Equipo("Temperley", (int) (Math.floor(Math.random()*5)), "gol de algun lanuniense");
+        Equipo e12 = new Equipo("Los andes", (int) (Math.floor(Math.random()*5)), "gol de algun banfielano");
 
         // Lleno mis partidos con equipos y mi ronda con partidos.
         p1.getEquipos().add(e1);
@@ -80,7 +80,8 @@ public class TrabajoIntegrador {
         simularRonda(rondas, jugadores); // Simula los partidos y agrega los puntos
 
     }
-
+    
+    //Metodo para simular mis rondas y mostrarlas
     public static void simularRonda(ArrayList<Ronda> rondas, Jugador[] jugadores) {
         //Variables auxiliares
         int nroPartido;
@@ -88,6 +89,7 @@ public class TrabajoIntegrador {
         String equipo1;
         String equipo2;
         String equipoGanador;
+        int golesGanador;
         //Variables auxiliares
         for (int z = 0; z < rondas.size(); z++) {
             Ronda rondaActual = rondas.get(z);
@@ -99,7 +101,8 @@ public class TrabajoIntegrador {
                 System.out.println("");
                 if (resultado != 2) {   // si el resultado no es 2, veo quien fue el ganador
                     equipoGanador = rondaActual.getPartidos().get(i).getEquipos().get(resultado).nombre; // Extraigo nombre ganador
-                    System.out.println("El ganador es " + equipoGanador + "!");
+                    golesGanador = rondaActual.getPartidos().get(i).getEquipos().get(resultado).goles; // Extraigo nombre ganador
+                    System.out.println("El ganador es " + equipoGanador + " con "+ golesGanador +" goles!");
                     System.out.println("");
                 } else {
                     System.out.println("Es un empate!");    // sino es un empate.
@@ -110,12 +113,14 @@ public class TrabajoIntegrador {
                 System.out.println("-----------------------------------------------------------------");
             }
         }
+        asociarPuntos(jugadores);
         System.out.println("Ranking:");
         System.out.println("");
         mostrarPuntos(jugadores);
 
     }
-
+    
+    //Metodo para mostrar las apuestas realizadas por mi jugadores
     public static void mostrarApuesta(Jugador[] jugadores, int nroPartido) {
         Jugador jugadorActual;
         String nombreApuesta;
@@ -135,13 +140,13 @@ public class TrabajoIntegrador {
             }
         }
     }
-
+    
+    //Metodo para crear mis jugadores
     public static Jugador[] crearJugadores(int cantidadJugadores, ArrayList<Ronda> rondas) {
         Jugador jugadores[] = new Jugador[cantidadJugadores];
 
         for (int i = 0; i < jugadores.length; i++) {
             String nombreJugador = JOptionPane.showInputDialog("Ingrese nombre del jugador:");
-            //System.out.println(nombreJugador);
             //Valido si me paso un nombre valido
             while (nombreJugador.equals("")) {
                 System.out.println("Ingresa un nombre!");
@@ -172,19 +177,24 @@ public class TrabajoIntegrador {
         return (jugadores);
 
     }
-
+    
+    //Metodo para mostrar todos mis jugadores
     public static void mostrarJugadores(Jugador[] jugadores) {
         for (int i = 0; i < jugadores.length; i++) {
             jugadores[i].mostrarJugador();
             System.out.println("");
         }
     }
-
-    public static void mostrarPuntos(Jugador[] jugadores) {
-
+    
+    //Metodo para asignar puntos a mis jugadores dependiendo de sus apuestas.
+    public static void asociarPuntos(Jugador[] jugadores){
         for (int i = 0; i < jugadores.length; i++) {
             jugadores[i].puntos();
         }
+    }
+    
+    //Metodo para mostrar los puntos  de mis jugadores luego de ordenarlos. (logica de ordenamiento extraida)
+    public static void mostrarPuntos(Jugador[] jugadores) {
         ordenarPorPuntaje(jugadores);
 
         for (int i = 0; i < jugadores.length; i++) {
@@ -193,19 +203,21 @@ public class TrabajoIntegrador {
             System.out.println("");
         }
     }
-
+    
+    //Metodo para validar si lo que me pasaron es un numero
     public static boolean esNumero(String eleccion) {
         if (eleccion == null) {
             return false;
         }
         try {
-            double d = Double.parseDouble(eleccion);
+            int d = Integer.parseInt(eleccion);
         } catch (NumberFormatException nfe) {
             return false;
         }
         return true;
     }
-
+    
+    //Metodo Bubble Sorting para ordenar los puntajes.
     public static void ordenarPorPuntaje(Jugador[] jugadores) {
         int index;
         int contador;
@@ -227,7 +239,8 @@ public class TrabajoIntegrador {
             }
         }
     }
-
+    
+    //Metodo para validar si me paso una cantidad de jugadores numerica y si esa cantidad es valida.
     public static int validarCantidadJugadores(String eleccion) {
         String cantidadEleccion = eleccion;
         while (!esNumero(cantidadEleccion) || Integer.parseInt(cantidadEleccion) <= 0) {
